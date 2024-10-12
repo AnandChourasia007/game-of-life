@@ -1,5 +1,5 @@
 //! Test suite for the Web and headless browsers.
-
+#![allow(unused_variables)]
 #![cfg(target_arch = "wasm32")]
 
 extern crate wasm_bindgen_test;
@@ -39,4 +39,14 @@ pub fn test_tick(){
     let expected_universe = expected_spaceship();
     input_universe.tick();
     assert_eq!(&input_universe.get_cells(), &expected_universe.get_cells());
+}
+
+
+fn main() {
+    extern crate web_sys;
+    macro_rules! log {
+        ( $( $t:tt )* ) => {
+            web_sys::console::log_1(&format!( $( $t )* ).into());
+        }
+    }
 }
