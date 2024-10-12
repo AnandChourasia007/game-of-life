@@ -4,7 +4,7 @@ Javascript stores objects, arrays and DOM nodes in a GC heap. Our rust values li
 
 The cells of the universe are stored as a linear bool array.
 
-This project uses node 16.15.1, so used nvm to set it to this version.
+This project uses node 16.15.1, so used nvm to set it to this version. All this nvm/npm stuff is to be done only in the www folder.
 Before running 'npm run start', type 'nvm use 16.15.1'. This loads up localhost. Anytime you make changes and want them reflected on http://localhost:8080/, just re-run the 'wasm-pack build' command within the wasm-game-of-life directory.
 
 

@@ -22,6 +22,15 @@ pub enum Cell {
     Alive = 1,
 }
 
+impl Cell {
+    fn toggle(&mut self) {
+        *self = match *self {
+            Cell::Dead => Cell::Alive,
+            Cell::Alive => Cell::Dead,
+        };
+    }
+}
+
 #[wasm_bindgen]
 pub struct Universe {
     width: i32, 
@@ -84,7 +93,7 @@ impl Universe {
         self.cells = next_state;
     }
     pub fn new() -> Universe {  // constructor to initialize the Universe 
-        utils::set_panic_hook();
+        // utils::set_panic_hook();
         let width: i32 = 100;
         let height: i32 = 100;
         let limit: i32 = width * height;
@@ -126,6 +135,10 @@ impl Universe {
     }
     pub fn cells(&self) -> *const Cell {  // const makes it a read only pointer to prevent modificatios from JavaScript side
         self.cells.as_ptr()
+    }
+    pub fn toggle_cell(&mut self, row: i32, col: i32) {
+        let idx = self.get_index(row, col);
+        self.cells[idx].toggle();
     }
 }
 
