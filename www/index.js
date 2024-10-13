@@ -6,7 +6,7 @@ const GRID_COLOR = "#404240";
 const DEAD_COLOR = "#adb3ae";
 const ALIVE_COLOR = "#404240";
 
-const universe = Universe.new();
+let universe = Universe.new();
 const width = universe.width();
 const height = universe.height();
 
@@ -64,10 +64,12 @@ const play = () => {
     pauseFlag = false;
     renderLoop();
 }
+
 const pause = () => {
     playPauseButton.textContent = "▶";
     pauseFlag = true;
 };
+
 playPauseButton.addEventListener("click", event => {
     if(pauseFlag) {
         play();
@@ -79,10 +81,17 @@ playPauseButton.addEventListener("click", event => {
 const resetButton = document.getElementById("reset");
 resetButton.addEventListener("click", ()=>{
     universe.reset_universe();
-    universe.tick();
     drawGrid();
     drawCells();
     console.log("Trying to reset the universe!!!");
+});
+
+const randomizeButton = document.getElementById("randomize");
+randomizeButton.addEventListener("click", ()=>{
+    universe = Universe.new();
+    drawGrid();
+    drawCells();
+    console.log("Trying to randomize the universe!!!");
 });
 
 canvas.addEventListener("click", event => {
@@ -104,11 +113,11 @@ const fpsValue = document.getElementById("fps-value");
 fps.addEventListener("click", () => {
     fpsValue.textContent = fps.value;
 });
+
 let wait_duration = Infinity;
 const renderLoop = () => {
     // debugger;
     console.log(fps.value);
-    // fpsValue.textContent = fps.value;
     if(!pauseFlag){
         wait_duration = 1000/(fps.value);
         setTimeout(() => {
