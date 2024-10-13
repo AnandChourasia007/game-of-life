@@ -97,21 +97,6 @@ impl Universe {
         let width: i32 = 100;
         let height: i32 = 100;
         let limit: i32 = width * height;
-        ////////////////////////////////// Initial glider pattern
-        // let matrix = vec![
-        //     vec![2, 3],
-        //     vec![3, 4],
-        //     vec![4, 2],
-        //     vec![4, 3],
-        //     vec![4, 4],
-       
-        // ];
-        // let mut pattern:Vec<bool> = vec![false; (width * height) as usize];
-        // for i in matrix.iter() {
-        //     let current = i[0] * width + i[1];
-        //     pattern[current as usize] = true;
-        // }
-        //////////////////////////////////
         let random_bool = || rand::thread_rng().gen() ; // closure
         let cells = (0..limit)
             .map(|i| {
@@ -139,6 +124,14 @@ impl Universe {
     pub fn toggle_cell(&mut self, row: i32, col: i32) {
         let idx = self.get_index(row, col);
         self.cells[idx].toggle();
+    }
+    pub fn reset_universe(&mut self) {
+        let width: i32 = 100;
+        let height: i32 = 100;
+        let limit: i32 = width * height;
+        self.cells = (0..width * self.height)
+        .map(|_i| Cell::Dead)
+        .collect();
     }
 }
 impl Universe { // impl block that is not exposed to JS, and contains test functions

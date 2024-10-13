@@ -20,8 +20,9 @@
   <body>
     <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
     <button id="play-pause"></button>
-    <input id="fps-meter" type="range" min="1" max="100">
-    <label for="fps-meter">FPS: <span id="fps-value"></span></label>
+    <button id="reset">Reset &#10227</button>
+    <input id="fps-meter" type="range" min="1" max="100" value="50">
+    <label for="fps-meter">FPS: <span id="fps-value">50</span></label>
     <canvas id="game-of-life-canvas"></canvas>
     <script src="./bootstrap.js"></script>
   </body>

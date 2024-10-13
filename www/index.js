@@ -76,7 +76,17 @@ playPauseButton.addEventListener("click", event => {
     }
 });
 
+const resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", ()=>{
+    universe.reset_universe();
+    universe.tick();
+    drawGrid();
+    drawCells();
+    console.log("Trying to reset the universe!!!");
+});
+
 canvas.addEventListener("click", event => {
+    console.log("Clicking the canvas")
     const boundingRect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / boundingRect.width;
     const scaleY = canvas.height / boundingRect.height;
@@ -91,13 +101,16 @@ canvas.addEventListener("click", event => {
 
 const fps = document.getElementById("fps-meter");
 const fpsValue = document.getElementById("fps-value");
+fps.addEventListener("click", () => {
+    fpsValue.textContent = fps.value;
+});
 let wait_duration = Infinity;
 const renderLoop = () => {
     // debugger;
     console.log(fps.value);
+    // fpsValue.textContent = fps.value;
     if(!pauseFlag){
         wait_duration = 1000/(fps.value);
-        fpsValue.textContent = fps.value;
         setTimeout(() => {
             animationId = requestAnimationFrame(renderLoop);
         }, wait_duration);
