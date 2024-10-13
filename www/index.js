@@ -99,10 +99,7 @@ const renderLoop = () => {
         wait_duration = 1000/(fps.value);
         fpsValue.textContent = fps.value;
         setTimeout(() => {
-            var startTime = performance.now();
             animationId = requestAnimationFrame(renderLoop);
-            var endTime = performance.now()*1000;
-            console.log(`requestAnimationFrame takes ${(endTime - startTime)*1000} nanoseconds`)
         }, wait_duration);
         universe.tick();
         drawGrid();

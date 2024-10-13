@@ -141,7 +141,6 @@ impl Universe {
         self.cells[idx].toggle();
     }
 }
-
 impl Universe { // impl block that is not exposed to JS, and contains test functions
     pub fn get_cells(&self) -> &[Cell] {
         &self.cells

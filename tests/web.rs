@@ -41,7 +41,6 @@ pub fn test_tick(){
     assert_eq!(&input_universe.get_cells(), &expected_universe.get_cells());
 }
 
-
 // fn main() {
 //     extern crate web_sys;
 //     macro_rules! log {
