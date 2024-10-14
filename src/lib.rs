@@ -1,4 +1,8 @@
 mod utils;
+use serde::{Deserialize, Serialize};
+use serde_json::{Result, Value};
+use std::io::Read;
+use std::fs;
 use rand::Rng;
 use std::fmt;
 use wasm_bindgen::prelude::*;
@@ -29,6 +33,11 @@ impl Cell {
             Cell::Alive => Cell::Dead,
         };
     }
+}
+
+pub struct Pattern {
+    name: String,
+    pattern_cells: Vec<Vec<u8>>,
 }
 
 #[wasm_bindgen]
@@ -132,6 +141,12 @@ impl Universe {
         self.cells = (0..width * self.height)
         .map(|_i| Cell::Dead)
         .collect();
+    }
+    pub fn set_pattern(&mut self, pattern_idx: Vec<i32>) {
+        self.reset_universe();
+        for idx in pattern_idx.iter() {
+            self.cells[*idx as usize] = Cell::Alive;
+        }
     }
 }
 impl Universe { // impl block that is not exposed to JS, and contains test functions

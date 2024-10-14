@@ -1,5 +1,6 @@
 import { Universe, Cell } from "game-of-life";
 import { memory } from "game-of-life/game_of_life_bg.wasm";
+import pattern_data from "./assets/patterns.json";
 
 const CELL_SIZE = 5; // pixels
 const GRID_COLOR = "#404240";
@@ -14,6 +15,37 @@ const canvas = document.getElementById("game-of-life-canvas");
 canvas.height = (CELL_SIZE + 1) * height + 1;
 canvas.width = (CELL_SIZE + 1) * width + 1;
 const ctx = canvas.getContext('2d');
+
+const populatePatternList = () => {
+    fetch('./assets/patterns.json')
+    .then(response => response.json())
+    .then(data => {
+        const selectElement = document.getElementById("pattern-list");
+        // data = data.patterns;
+
+        Object.keys(data).forEach((key) => {
+            const optionElement = document.createElement("option");
+            optionElement.value = key;
+            optionElement.text = key;
+            selectElement.appendChild(optionElement);
+        });
+    });
+};
+
+const selectPattern = document.getElementById("pattern-list");
+selectPattern.addEventListener("change", () => {
+    const selectedPattern = selectPattern.value;
+    let selectedPatternCells = pattern_data[selectedPattern];
+    let patternIdx = [];
+    selectedPatternCells.forEach((value)=>{
+        let row = value[0];
+        let column = value[1];
+        patternIdx.push(getIndex(row, column));
+    });
+    universe.set_pattern(patternIdx);
+    drawCells();
+    pause();
+});
 
 const getIndex = (row, column) => {
     return row * width + column;
@@ -129,6 +161,7 @@ const renderLoop = () => {
     }
 };
 
+populatePatternList();
 play();
 
 

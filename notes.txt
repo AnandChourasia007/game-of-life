@@ -9,6 +9,10 @@ Before running 'npm run start', type 'nvm use 16.15.1'. This loads up localhost.
 
 Each tick takes 100 to 200 nanoseconds
 
+Add glider, pulsar and a simple gun
+-> So, reading json in rust somehow breaks the code. No idea why. Another way to achieve the goal would be to instead send an array of indices to rust from javascript to make the pattern.
+-------------------------------
+
 Future work:
 Initialize with a spaceship, DONE
 Random initialization of the universe, DONE, cargo add rand, and use a random_bool closure
