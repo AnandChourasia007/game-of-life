@@ -3,6 +3,6 @@
 ## Usage
 
 ```
-npm init wasm-app
+npm init game-of-life
 npm run start
 ```
