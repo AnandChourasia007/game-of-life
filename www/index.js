@@ -21,8 +21,6 @@ const populatePatternList = () => {
     .then(response => response.json())
     .then(data => {
         const selectElement = document.getElementById("pattern-list");
-        // data = data.patterns;
-
         Object.keys(data).forEach((key) => {
             const optionElement = document.createElement("option");
             optionElement.value = key;
@@ -142,6 +140,7 @@ canvas.addEventListener("click", event => {
 
 const fps = document.getElementById("fps-meter");
 const fpsValue = document.getElementById("fps-value");
+const actualFps = document.getElementById("actual-fps");
 fps.addEventListener("click", () => {
     fpsValue.textContent = fps.value;
 });
@@ -150,15 +149,24 @@ let wait_duration = Infinity;
 const renderLoop = () => {
     // debugger;
     console.log(fps.value);
+    let true_fps = 0;
+    let lastTickTime = performance.now();
+    let delta = 0;
     if(!pauseFlag){
         wait_duration = 1000/(fps.value);
         setTimeout(() => {
             animationId = requestAnimationFrame(renderLoop);
         }, wait_duration);
         universe.tick();
+        delta = performance.now() - lastTickTime + wait_duration;
+        lastTickTime = performance.now();
+        true_fps = (1000/delta).toFixed(2);
+        actualFps.textContent = "Actual FPS: " + true_fps;
         drawGrid();
         drawCells();
-    }
+    } else {
+        actualFps.textContent = "Actual FPS: " + 0;
+    } 
 };
 
 populatePatternList();

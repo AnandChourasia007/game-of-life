@@ -21,3 +21,24 @@
     align-items: center;
     justify-content: center;
 } */
+
+.interactivity {
+    display: flex;
+    flex-direction: column;
+}
+.row-1 {
+    padding: 6px 0;
+    width: 600px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.fps {
+    display: flex;
+    flex-direction: column;
+}
+.row-2 {
+    width: 600px;
+    display: flex;
+    justify-content: space-evenly;
+}
